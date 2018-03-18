@@ -8,7 +8,8 @@ import graywind.shop.bean.HelloBean;
 
 @RestController
 public class HelloController {
-	@RequestMapping("/")
+
+    @RequestMapping("/")
     public String index() {
         return "Greetings from Spring Boot!";
     }
