@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form class="form-signin" role="form" th:action="@{/user/login}"
+		th:method="post">
+		<input type="text" class="form-control" placeholder="用户名"
+			required="required" name="userName" /> <input type="password"
+			class="form-control" placeholder="密码" required="required"
+			name="password" />
+		<button class="btn btn-lg btn-warning btn-block" type="submit">登录</button>
+		<label class="checkbox"> <input type="checkbox"
+			value="remember-me" /> 记住我
+		</label>
+	</form>
+	<p th:if="${success} == false">登录失败</p>
+</body>
+</html>
