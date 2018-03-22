@@ -26,6 +26,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        String username = (String) request.getSession().getAttribute("username");
+        if (Optional.ofNullable(username).map(String::length).orElse(0) > 0) {
+            return true;
+        }
+
         if (!handler.getClass().isAssignableFrom(HandlerMethod.class)) {
             return true;
         }
@@ -37,13 +42,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (clazz.isAnnotationPresent(Auth.class) || method.isAnnotationPresent(Auth.class)) {
             if (request.getAttribute(USER_CODE_SESSION_KEY) == null) {
                 response.sendRedirect(request.getContextPath() + "/login");
-                // throw new Exception();
-
+                return false;
             } else {
                 return true;
             }
         }
-
         return true;
 
     }

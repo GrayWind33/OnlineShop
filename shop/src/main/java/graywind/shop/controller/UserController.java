@@ -1,5 +1,7 @@
 package graywind.shop.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,17 @@ public class UserController {
     private UserService userSvc;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(User user, Model model) {
-
+    public String login(User user, HttpServletRequest request, Model model) {
         try {
             if (userSvc.hasUser(user)) {
+                request.getSession().setAttribute("username",user.getUsername());
                 return "redirect:/";
             } else {
                 model.addAttribute("success", false);
                 return "static/login";
             }
         } catch (Exception e) {
-            System.out.println("登陆失败：" + e);
+            logger.error("登陆失败：" + e.getMessage());
         }
         model.addAttribute("success", false);
         return "static/login";
