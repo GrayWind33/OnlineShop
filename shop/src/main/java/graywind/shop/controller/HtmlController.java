@@ -23,4 +23,9 @@ public class HtmlController {
 		model.addAttribute("success", true);
 		return "static/login";
     }
+    
+    @GetMapping("/register")
+    public String register(Model model) {
+        return "static/register";
+    }
 }

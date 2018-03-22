@@ -8,7 +8,7 @@
 	<form class="form-signin" role="form" th:action="@{/user/login}"
 		th:method="post">
 		<input type="text" class="form-control" placeholder="用户名"
-			required="required" name="userName" /> <input type="password"
+			required="required" name="username" /> <input type="password"
 			class="form-control" placeholder="密码" required="required"
 			name="password" />
 		<button class="btn btn-lg btn-warning btn-block" type="submit">登录</button>
@@ -16,6 +16,8 @@
 			value="remember-me" /> 记住我
 		</label>
 	</form>
+	<a href="/register">注册</a>
 	<p th:if="${success} == false">登录失败</p>
+	<p th:text="${info}" />
 </body>
 </html>

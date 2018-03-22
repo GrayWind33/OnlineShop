@@ -1,30 +1,36 @@
 package graywind.shop.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import graywind.shop.bean.TestBean;
 import graywind.shop.bean.User;
-import graywind.shop.dao.TestMapper;
+import graywind.shop.dao.UserMapper;
 import graywind.shop.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
     @Autowired
-    private TestMapper testMapper;
-    
-	@Override
-	public boolean hasUser(User user) {
-	    List<TestBean> testlist = testMapper.getTest();
-	    for(TestBean test : testlist) {
-	        System.out.println(test.getId() + test.getTxt());
-	    }
-	    if(user.getUserName().equals(user.getPassword())){
-			return true;
-		}
-		return false;
-	}
-	
+    private UserMapper userMapper;
+
+    @Override
+    public boolean hasUser(User user) {
+        User trueUser = userMapper.getUser(user.getUsername());
+        if (trueUser.getPassword().equals(user.getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void registerUser(User user) throws Exception {
+        if (user == null || user.getUsername() == null || user.getPassword() == null) {
+            throw new Exception("输出用户名或密码为空!");
+        }
+        User trueUser = userMapper.getUser(user.getUsername());
+        if (trueUser != null) {
+            throw new Exception("该用户名已存在!");
+        }
+        userMapper.register(user);
+    }
 }

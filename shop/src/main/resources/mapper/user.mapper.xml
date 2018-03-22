@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graywind.shop.dao.UserMapper">
+	<select id="getUser" resultType="graywind.shop.bean.User">
+		select id,username,password,register_time,active,balance from user
+		<if test="username!=null">where username = #{username}</if>
+	</select>
+	<insert id="register" parameterType="graywind.shop.bean.User">
+		insert into user(username,password,register_time,active,balance)
+		values(#{username}, #{password}, CURRENT_TIMESTAMP, ${active},
+		${balance})
+	</insert>
+</mapper>
