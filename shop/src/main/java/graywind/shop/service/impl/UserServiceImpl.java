@@ -3,6 +3,7 @@ package graywind.shop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import graywind.shop.bean.SessionData;
 import graywind.shop.bean.User;
 import graywind.shop.dao.UserMapper;
 import graywind.shop.service.UserService;
@@ -32,5 +33,11 @@ public class UserServiceImpl implements UserService {
             throw new Exception("该用户名已存在!");
         }
         userMapper.register(user);
+    }
+
+    @Override
+    public SessionData getSession(String session) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
