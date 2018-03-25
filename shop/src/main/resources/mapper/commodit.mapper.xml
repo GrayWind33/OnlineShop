@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graywind.shop.dao.CommoditMapper">
+	<select id="getCommodit" resultType="graywind.shop.bean.Commodit">
+		select id,name,owner_id,volumn,price from commodit
+	</select>
+	
+	<select id="getSingleCommodit" resultType="graywind.shop.bean.Commodit">
+		select id,name,owner_id,volumn,price from commodit
+		where id = ${commoditId}
+	</select>
+</mapper>

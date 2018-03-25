@@ -1,6 +1,7 @@
 package graywind.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,10 @@ public class UserController {
     public String login(User user, HttpServletRequest request, Model model) {
         try {
             if (userSvc.hasUser(user)) {
-                request.getSession().setAttribute("username",user.getUsername());
+                user = userSvc.getUser(user.getUsername());
+                HttpSession session = request.getSession();
+            	session.setAttribute("username",user.getUsername());
+            	session.setAttribute("userid",user.getId());
                 return "redirect:/";
             } else {
                 model.addAttribute("success", false);

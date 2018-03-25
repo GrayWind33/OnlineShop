@@ -5,6 +5,8 @@ import graywind.shop.bean.User;
 
 public interface UserService {
     public boolean hasUser(User user);
+    
+    public User getUser(String username);
 
     public void registerUser(User user) throws Exception;
     

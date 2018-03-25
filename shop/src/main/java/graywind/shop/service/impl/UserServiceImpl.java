@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public User getUser(String username) {
+		return userMapper.getUser(username);
+	}
 }

@@ -1,10 +1,36 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p>Get your greeting <a href="/greeting">here</a></p>
+	<p>
+		购物车 <a href="/greeting">here</a>
+	</p>
+
+
+	<table>
+		<tr>
+			<th>商品名</th>
+			<th>价格</th>
+			<th>库存</th>
+			<th>添加</th>
+		</tr>
+		<tr th:each="commodit : ${commodits}">
+			<td th:text="${commodit.name}" />
+			<td th:text="${commodit.price}" />
+			<td th:text="${commodit.volumn}" />
+			<td th:onclick="'javascript:addToCart('+${commodit.id}+')'">
+				<button>添加到购物车</button>
+			</td>
+		</tr>
+	</table>
+
+	<script th:inline="javascript">
+		function addToCart(id) {
+			window.location.href="/cart/add/"+id;
+		};
+	</script>
 </body>
 </html>
