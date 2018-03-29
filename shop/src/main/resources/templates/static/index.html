@@ -6,8 +6,15 @@
 </head>
 <body>
 	<p>
-		购物车 <a href="/greeting">here</a>
+		购物车 <a href="/cart">here</a>
 	</p>
+	<p th:text="'余额: ' + ${balance}" />
+	<form class="form-recharge" role="form" th:action="@{/user/recharge}"
+        th:method="post">
+        <input type="text" class="form-control" placeholder="充值金额"
+            required="required" name="amount" /> 
+        <button class="btn btn-lg btn-warning btn-block" type="submit">充值</button>
+    </form>
 
 
 	<table>
@@ -27,9 +34,25 @@
 		</tr>
 	</table>
 
+	<script type="text/javascript"
+		th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+
 	<script th:inline="javascript">
 		function addToCart(id) {
-			window.location.href="/cart/add/"+id;
+			$.ajax({
+				url : "/cart/add/" + id,
+				data : {
+
+				},
+				type : "get",
+				dataType : "text",
+				success : function(text) {
+					if(text == "下单成功"){
+						window.location.href="/cart"
+					}
+					alert(text);
+				}
+			});
 		};
 	</script>
 </body>

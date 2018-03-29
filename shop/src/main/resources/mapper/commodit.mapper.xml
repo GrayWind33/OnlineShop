@@ -5,10 +5,21 @@
 <mapper namespace="graywind.shop.dao.CommoditMapper">
 	<select id="getCommodit" resultType="graywind.shop.bean.Commodit">
 		select id,name,owner_id,volumn,price from commodit
+		where owner_id != ${userId}
 	</select>
 	
 	<select id="getSingleCommodit" resultType="graywind.shop.bean.Commodit">
 		select id,name,owner_id,volumn,price from commodit
 		where id = ${commoditId}
 	</select>
+	
+	<delete id="delete">
+	   delete from commodit
+	   where id = ${commoditId}
+	</delete>
+	
+	<update id="update">
+	   update commodit set volumn = ${volumn}
+	   where id = ${commoditId}
+	</update>
 </mapper>

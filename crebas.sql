@@ -1,10 +1,14 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/3/22 星期四 23:52:01                       */
+/* Created on:     2018/3/30 星期五 0:32:32                        */
 /*==============================================================*/
 
 
 drop table if exists cart;
+
+drop index Index_owner on commodit;
+
+drop index Index_name on commodit;
 
 drop table if exists commodit;
 
@@ -44,11 +48,27 @@ create table commodit
 alter table commodit comment '商品信息表';
 
 /*==============================================================*/
+/* Index: Index_name                                            */
+/*==============================================================*/
+create index Index_name on commodit
+(
+   name
+);
+
+/*==============================================================*/
+/* Index: Index_owner                                           */
+/*==============================================================*/
+create index Index_owner on commodit
+(
+   owner_id
+);
+
+/*==============================================================*/
 /* Table: transaction                                           */
 /*==============================================================*/
 create table transaction
 (
-   id                   bigint not null,
+   id                   bigint not null auto_increment,
    buyer_id             bigint not null,
    seller_id            bigint not null,
    commodit_id          bigint not null,

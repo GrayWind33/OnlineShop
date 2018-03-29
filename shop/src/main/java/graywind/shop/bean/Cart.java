@@ -6,7 +6,7 @@ public class Cart {
 	private long userId;
 	private long commoditId;
 	private int volumn;
-	private Timestamp add_time;
+	private Timestamp addTime;
 
 	public long getUserId() {
 		return userId;
@@ -32,12 +32,14 @@ public class Cart {
 		this.volumn = volumn;
 	}
 
-	public Timestamp getAdd_time() {
-		return add_time;
-	}
+    public Timestamp getAddTime() {
+        return addTime;
+    }
 
-	public void setAdd_time(Timestamp add_time) {
-		this.add_time = add_time;
-	}
+    public void setAddTime(Timestamp addTime) {
+        this.addTime = addTime;
+    }
+
+
 
 }

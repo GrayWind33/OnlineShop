@@ -1,5 +1,7 @@
 package graywind.shop.service.impl;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +43,24 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-	@Override
-	public User getUser(String username) {
-		return userMapper.getUser(username);
-	}
+    @Override
+    public User getUser(String username) {
+        return userMapper.getUser(username);
+    }
+
+    @Override
+    public void decreaseBalance(long userId, double amount) throws SQLException {
+        User user = userMapper.getUserById(userId);
+        if (user.getBalance() < amount) {
+            throw new SQLException("余额不足");
+        }
+        userMapper.updateBanlance(userId, user.getBalance() - amount);
+    }
+
+    @Override
+    public void increaseBanlance(long userId, double amount) throws SQLException {
+        User user = userMapper.getUserById(userId);
+        userMapper.updateBanlance(userId, user.getBalance() + amount);
+
+    }
 }

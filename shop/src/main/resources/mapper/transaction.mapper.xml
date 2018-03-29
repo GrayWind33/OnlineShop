@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graywind.shop.dao.TransactionMapper">
+	<select id="getTransactionByBuyer" resultType="graywind.shop.bean.Transaction">
+		select
+		buyer_id,
+		seller_id,
+		commodit_id,
+		volumn,
+		price,
+		produce_time
+		from transaction
+		where
+		buyer_id=${buyerId}
+	</select>
+
+	<select id="getTransactionBySeller" resultType="graywind.shop.bean.Transaction">
+		select
+		buyer_id,
+		seller_id,
+		commodit_id,
+		volumn,
+		price,
+		produce_time
+		from transaction
+		where
+		seller_id=${sellerId}
+	</select>
+
+	<insert id="addTransaction" parameterType="graywind.shop.bean.Transaction">
+		insert into
+		transaction(buyer_id,seller_id,commodit_id,volumn,price,produce_time)
+		values
+		(${buyerId},${sellerId},${commoditId},${volumn},${price},CURRENT_TIMESTAMP)
+	</insert>
+</mapper>

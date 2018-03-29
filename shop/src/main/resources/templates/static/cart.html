@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>购物车</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>
+		返回 <a href="/">here</a>
+	</p>
+
+
+	<table>
+		<tr>
+			<th>商品名</th>
+			<th>数量</th>
+			<th>添加时间</th>
+			<th>删除</th>
+			<th>下单</th>
+		</tr>
+		<tr th:each="cart : ${carts}">
+			<td th:text="${cart.commoditId}" />
+			<td th:text="${cart.volumn}" />
+			<td th:text="${cart.addTime}" />
+			<td th:onclick="'javascript:removeCart('+${cart.commoditId}+')'">
+				<button>删除</button>
+			</td>
+			<td th:onclick="'javascript:buy('+${cart.commoditId}+')'">
+                <button>下单</button>
+            </td>
+		</tr>
+	</table>
+
+	<script type="text/javascript"
+		th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+
+	<script th:inline="javascript">
+		function removeCart(id) {
+			$.ajax({
+				url : "/cart/delete/" + id,
+				data : {
+
+				},
+				type : "get",
+				dataType : "text",
+				success : function(text) {
+					window.location.href = "/cart";
+				}
+			});
+		};
+		function buy(id) {
+            $.ajax({
+                url : "/cart/buy/" + id,
+                data : {
+
+                },
+                type : "get",
+                dataType : "text",
+                success : function(text) {
+                	alert(text);
+                }
+            });
+        };
+	</script>
+</body>
+</html>

@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="graywind.shop.dao.CartMapper">
+	
+	
 	<select id="getSingleCart" resultType="graywind.shop.bean.Cart">
 		select
 		user_id,commodit_id,volumn,add_time from cart
@@ -26,9 +28,17 @@
 
 	<update id="updateCart">
 		update cart
-		set volumn = volumn + 1
+		set volumn = ${volumn}
 		where user_id =
 		${userId}
 		and commodit_id = ${commoditId}
 	</update>
+
+	<delete id="deleteCart">
+		delete from cart
+		where user_id =
+		${userId}
+		and commodit_id =
+		${commoditId}
+	</delete>
 </mapper>

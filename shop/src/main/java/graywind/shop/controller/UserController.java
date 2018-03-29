@@ -56,4 +56,18 @@ public class UserController {
         }
         return "static/register";
     }
+    
+    @RequestMapping(value = "/recharge", method = RequestMethod.POST)
+    public String register(double amount, Model model,HttpServletRequest request) {
+        long userId = (long) request.getSession().getAttribute("userid");
+        logger.info("用户: " + userId + " 充值" + amount);
+        try {
+            userSvc.increaseBanlance(userId, amount);
+            model.addAttribute("info", "充值成功");
+        } catch (Exception e) {
+            logger.error("充值失败：" + e.getMessage());
+            model.addAttribute("info", "充值失败：" + e.getMessage());
+        }
+        return "static/result";
+    }
 }

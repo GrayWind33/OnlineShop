@@ -16,8 +16,8 @@ public class CommoditServiceImpl implements CommoditService {
 	private CommoditMapper commoditMapper;
 	
 	@Override
-	public List<Commodit> getCommodit() {
-		return commoditMapper.getCommodit();
+	public List<Commodit> getCommodit(long userId) {
+		return commoditMapper.getCommodit(userId);
 	}
 
 }

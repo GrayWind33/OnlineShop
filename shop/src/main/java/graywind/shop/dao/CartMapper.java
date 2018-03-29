@@ -9,7 +9,9 @@ import graywind.shop.bean.Cart;
 public interface CartMapper {
 	public void addCart(Cart cart);
 	
-	public void updateCart(@Param("userId") long userId,@Param("commoditId") long commoditId);
+	public void updateCart(@Param("userId") long userId,@Param("commoditId") long commoditId,@Param("volumn") int volumn);
+	
+	public void deleteCart(@Param("userId") long userId,@Param("commoditId") long commoditId);
 	
 	public Cart getSingleCart(@Param("userId") long userId,@Param("commoditId") long commoditId);
 	
